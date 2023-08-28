@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="space-y-8 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <div class="flex items-center justify-between mb-4">
+    <h5 class="text-2xl font-bold text-gray-900 dark:text-white">{{ object.owner }}</h5>
+    <div class="flex gap-2">
+      <form class="space-y-6" method="post" action="{% url 'product_update' object.pk %}">
+        {% csrf_token %}
+        <button type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-red-600">
+            <!-- ... -->
+          </svg>
+        </button>
+      </form>
+      <form method="post" action="{% url 'product_delete' object.pk %}">
+        {% csrf_token %}
+        <button type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-red-600">
+            <!-- ... -->
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  <h5 class="text-md font-bold text-gray-900 dark:text-white">Ownerd by: {{ object.owner }}</h5>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ object.description }}</p>
+  <!-- ... other details ... -->
+</div>
+<a href="{% url 'product_delete' object.pk %}"><button type="button" > Delete
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  class="w-6 h-6 text-blue-600"></svg></button></a>
+        <a href="{% url 'product_update' object.pk %}"><button type="button" > Update
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  class="w-6 h-6 text-blue-600"></svg></button></a>
+        {% endblock content %}
