@@ -2,10 +2,18 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from rest_framework import viewsets
+from rest_framework import viewsets,generics, permissions
 from .models import Product,Category,Comment,Favourite_product
 from .permissions import IsOwnerOrReadOnly,IsOwnerOnly
-from .serializers import ProductSerializer,CategorySerializer,CommentSerializer,Fav_productSerializer
+from .serializers import ProductSerializer,CategorySerializer,CommentSerializer,Fav_productSerializer,ProductImageSerializer
+# views.py
+
+
+
+class ProductImageView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductImageSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # Adjust permission as needed
 
  #1
 class ProductList(ListCreateAPIView):
