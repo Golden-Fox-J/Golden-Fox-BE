@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from account.models import CustomUser 
 from django.db import models
 from django.urls import reverse
 
@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    owner = models.ForeignKey(get_user_model(),on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(CustomUser(),on_delete=models.CASCADE, null=True, blank=True)
     category_type = models.CharField(max_length=256)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(CustomUser(), on_delete=models.CASCADE, null=True, blank=True)
     Title = models.CharField(max_length=256)
     image= models.ImageField(upload_to='uploads/', blank=True,null=True)
     description = models.TextField(default="", null=True, blank=True)
@@ -31,7 +31,7 @@ class Product(models.Model):
     
 
 class Comment(models.Model):
-    owner = models.ForeignKey(get_user_model(),on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(CustomUser(),on_delete=models.CASCADE, null=True, blank=True)
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(max_length=255)
     body = models.TextField()
@@ -41,7 +41,7 @@ class Comment(models.Model):
     
 
 class Favourite_product(models.Model):
-    owner = models.ForeignKey(get_user_model(),on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(CustomUser(),on_delete=models.CASCADE, null=True, blank=True)
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
