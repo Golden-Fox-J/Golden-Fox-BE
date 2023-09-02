@@ -15,6 +15,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     owner = models.ForeignKey(CustomUser(), on_delete=models.CASCADE, null=True, blank=True)
+    owner_name = models.CharField(max_length=255,default="Unknown")
     Title = models.CharField(max_length=256)
     image= models.ImageField(upload_to='uploads/', blank=True,null=True)
     description = models.TextField(default="", null=True, blank=True)
@@ -34,7 +35,7 @@ class Product(models.Model):
 
 class Comment(models.Model):
     owner = models.ForeignKey(CustomUser(),on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=255,default="Unknown")
+    owner_name = models.CharField(max_length=255,default="Unknown")
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(max_length=255)
     body = models.TextField()
