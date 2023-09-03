@@ -1,7 +1,7 @@
 from account.models import CustomUser 
 from django.db import models
 from django.urls import reverse
-
+from django.utils import timezone
 
 
 
@@ -22,6 +22,9 @@ class Product(models.Model):
     price = models.IntegerField()
     contact_info = models.CharField(max_length=256)
     category = models.ForeignKey(Category,on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
 
     
 
@@ -39,6 +42,18 @@ class Comment(models.Model):
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(max_length=255)
     body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def time_since_creation(self):
+        now = timezone.now()
+        duration = now - self.created_at
+        # You can format the duration as per your requirements
+        days, seconds = duration.days, duration.seconds
+        hours = days * 24 + seconds // 3600
+        minutes = (seconds % 3600) // 60
+        return f"{days} days, {hours} hours, {minutes} minutes"
 
     def __str__(self):
         return self.body
@@ -46,6 +61,7 @@ class Comment(models.Model):
 
 class Favourite_product(models.Model):
     owner = models.ForeignKey(CustomUser(),on_delete=models.CASCADE, null=True, blank=True)
+    owner_name = models.CharField(max_length=255,default="Unknown")
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:

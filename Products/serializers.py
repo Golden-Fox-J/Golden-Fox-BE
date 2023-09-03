@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils import timezone
 from .models import Product,Category,Comment,Favourite_product
 
 
@@ -71,9 +72,21 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class CommentSerializer(serializers.ModelSerializer):
+    time_since_creation = serializers.SerializerMethodField()
+    
     class Meta:
         model = Comment
         fields = "__all__"
+
+    def get_time_since_creation(self, obj):
+        now = timezone.now()
+        duration = now - obj.created_at
+        # Customize the format as needed
+        days, seconds = duration.days, duration.seconds
+        hours = days * 24 + seconds // 3600
+        minutes = (seconds % 3600) // 60
+        return f"{days} days, {hours} hours, {minutes} minutes"
+
 
 class Fav_productSerializer(serializers.ModelSerializer):
     class Meta:
