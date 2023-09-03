@@ -46,7 +46,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = ['https://goldenfox.up.railway.app', 'localhost', '127.0.0.1', '0.0.0.0', '*']
+ALLOWED_HOSTS = ['goldenfox.up.railway.app', 'localhost', '127.0.0.1', '0.0.0.0', '*']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -151,6 +151,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -179,10 +180,6 @@ SIMPLE_JWT = {
 CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 
-# TAILWIND
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
 
 # AUTH
 LOGIN_REDIRECT_URL = "home"
