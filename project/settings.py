@@ -46,7 +46,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = ['https://goldenfox.up.railway.app', 'localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['https://goldenfox.up.railway.app', 'localhost', '127.0.0.1', '0.0.0.0', '*']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
