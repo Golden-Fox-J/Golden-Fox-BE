@@ -194,3 +194,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
 
 
 AUTH_USER_MODEL = 'account.CustomUser'
+
+CSRF_TRUSTED_ORIGINS = ['https://example.com', 'https://subdomain.example.com']
