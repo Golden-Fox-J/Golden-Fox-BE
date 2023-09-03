@@ -22,13 +22,13 @@ class Product(models.Model):
     contact_info = models.CharField(max_length=256)
     category = models.ForeignKey(Category,on_delete=models.CASCADE, null=True, blank=True)
 
-    
+
     def __str__(self):
         return self.Title
 
     def get_absolute_url(self):
         return reverse('Product_detail', args=[str(self.id)])
-    
+
 
 class Comment(models.Model):
     owner = models.ForeignKey(get_user_model(),on_delete=models.CASCADE, null=True, blank=True)
@@ -38,11 +38,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.body
-    
+
 
 class Favourite_product(models.Model):
     owner = models.ForeignKey(get_user_model(),on_delete=models.CASCADE, null=True, blank=True)
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
+    class Meta:
+        unique_together = ('owner', 'Product')
 
     def __str__(self):
         return self.Product.Title
@@ -52,4 +54,4 @@ class Favourite_product(models.Model):
 
 
 
-    
+
