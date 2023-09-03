@@ -1,7 +1,7 @@
 from account.models import CustomUser 
 from django.db import models
 from django.urls import reverse
-
+from django.utils import timezone
 
 
 
@@ -44,6 +44,16 @@ class Comment(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def time_since_creation(self):
+        now = timezone.now()
+        duration = now - self.created_at
+        # You can format the duration as per your requirements
+        days, seconds = duration.days, duration.seconds
+        hours = days * 24 + seconds // 3600
+        minutes = (seconds % 3600) // 60
+        return f"{days} days, {hours} hours, {minutes} minutes"
 
     def __str__(self):
         return self.body
