@@ -176,6 +176,7 @@ SIMPLE_JWT = {
     ),  # lasts for 60 minutes
 }
 
+CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 
 # TAILWIND
