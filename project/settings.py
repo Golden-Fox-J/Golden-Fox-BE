@@ -172,7 +172,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(
-        seconds=60 * 60
+        seconds=600 * 600 
     ),  # lasts for 60 minutes
 }
 
